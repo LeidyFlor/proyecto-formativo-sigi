@@ -1,7 +1,7 @@
 @import url(tokens.css);
 @import url(semantic.css);
 @import "tailwindcss";
-/* Esta linea debe quedar al final para que funcione/  */
+/* Esta linea debe quedar al final para que funcione  */
 
 @theme{
      /* =====BRAND===== */
@@ -52,13 +52,10 @@
     --text-small: var(--semantic-font-size-small);
     --text-caption: var(--semantic-font-size-caption);
 
-    /==== FONT WEIGHT ======/
+    /*==== FONT WEIGHT ======*/
 
     --font-heading: var(--semantic-font-weigt-heading);
     --font-body: var( --semantic-font-weigt-body);
     --font-label: var(--semantic-font-weigt-label);
-
-    
-
     
 }
