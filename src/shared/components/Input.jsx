@@ -10,20 +10,31 @@ export default function Input({
     return (
         //Contenedor del input que se exporta con label, cuerpo y feedback message
         <div className="w-[320px]">
-            {/* Label  */}
-            <label
-                className="
-                block
-                text-caption
-                mb-1
-                text-text-primary
-            ">
-                {label}
+            {/* LABEL. JWT evalua si tal es 1, si si lo hace  */}
 
-            </label>
+            {label &&(
+                <label
+                    className="
+                    block
+                    text-[8px]
+                    mb-1
+                    place-self-start
+                ">
+                    {label}
+
+                </label>
+            )}
+
+            
 
             {/* contenedor del input */}
-            <div>
+            {/* este classname permite escribir en todos los campo */}
+            <div className="
+                relative
+                h-12
+                flex
+                items-center
+            ">
                 {/* Area interactiva invisibe de un input  48px*/}
 
                     <div 
@@ -38,12 +49,13 @@ export default function Input({
                             `nextSibling` obtiene el siguinete nodo en el DOM (puede ser un input u otro elemento)*/
                             e.currentTarget.nextElementSibling.focus(); /*Linea de codigo de area disponible de 48px */
                         }}
-                        >
+                        />
 
-                    </div>
                     {/* Area visual del input */}
                         {/* border-border es el colo rdel borde con variables */}
                     <input
+                    // toma el input de cuando se crea el input
+                    type={type}
                     className="
                         relative
                         w-full
