@@ -1,6 +1,14 @@
-import { Input, Button } from "@/shared"
+import { Input, Button, DeleteCounter, DeleteEffect, DeleteCounter2, Select } from "@/shared"
+import { getDocumentTypes } from "@/features/users/services/selectService";
+import { useEffect, useState } from "react";
 
 export default function UserRegisterForm(){
+    const [ documentTypes, setDocumentTypes] =useState([]);
+
+    useEffect(() => {
+        getDocumentTypes().then(setDocumentTypes);
+}, []);
+    
     
     // Handle eventos. onChange cada vez que se escribe. onBlur toma el valor cuando uno sale del campo
 
@@ -59,6 +67,12 @@ export default function UserRegisterForm(){
                         type="number"
                     />
 
+                    <Select 
+                        label="Tipo de documento"
+                        name="documentType"
+                        options={documentTypes}
+                    />
+
                     {/* Acciones */}
                     <div className="flex items-end justify-end gap-12">
                         <Button
@@ -75,11 +89,18 @@ export default function UserRegisterForm(){
                             Guardar
                         </Button>
 
+
+
                     </div>
                 </div>
                 
                 
             </form>
+                        {/* <DeleteCounter /> */}
+                        {/* uso del useeffect */}
+                        {/* <DeleteEffect /> */}
+
+                        <DeleteCounter2 />
             
         </div>
     )
