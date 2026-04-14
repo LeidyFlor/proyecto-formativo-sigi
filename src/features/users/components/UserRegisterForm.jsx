@@ -15,9 +15,6 @@ export default function UserRegisterForm(){
     const handleNameChange = (e) =>{
         console.log("Nombre: ", e.target.value);
     }
-    const handleEmailBlur = (e) =>{
-        console.log("Email: ", e.target.value);
-    }
 
 
     return(
@@ -30,48 +27,39 @@ export default function UserRegisterForm(){
                 <div className="grid grid-cols-2 gap-6 my-0 mx-auto">
                     <Input
                         label="Nombre"
+                        name="userName"
                         placeholder="Ingrese su nombre"
                         onChange={handleNameChange}
                     />
                     <Input
-                        label="Nombre"
-                        placeholder="Ingrese su nombre"
-                    />
-                    <Input
-                        label="Nombre"
-                        placeholder="Ingrese su nombre"
-                    />
-                    <Input
-                        label="Nombre"
-                        placeholder="Ingrese su nombre"
+                        label="Correo"
+                        name="userEmail"
+                        placeholder="Ingrese su correo"
+                        type="email"
                     />
                     <Input
                         label="Telefono"
+                        name="userPhone"
                         placeholder="Ingrese su telefono"
                         type="tel"
                     />
-                    <Input
-                        label="Correo"
-                        placeholder="Ingrese su correo"
-                        type="email"
-                        onBlur={handleEmailBlur}
-                    />
-                    <Input
-                        label="Contraseña"
-                        placeholder="Ingrese su contraseña"
-                        type="password"
-                    />
-                    <Input
-                        label="Edad"
-                        placeholder="Ingrese su edad"
-                        type="number"
-                    />
-
-                    <Select 
+                    <Select
                         label="Tipo de documento"
                         name="documentType"
                         options={documentTypes}
                     />
+                    <Input
+                        label="Número de documento"
+                        name="userDocumenNumber"
+                        placeholder="Ingrese su numero de documento"
+                    />
+                    <Input
+                        label="Contraseña"
+                        name="userPassword"
+                        placeholder="Ingrese su contraseña"
+                        type="password"
+                    />
+           
 
                     {/* Acciones */}
                     <div className="flex items-end justify-end gap-12">

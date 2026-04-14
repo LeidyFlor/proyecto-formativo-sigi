@@ -11,8 +11,8 @@ export default function Button({
     ...props        //Propiedades adicionales(onClick, diseable, etc)
 }){
 const variants = {
-    primary: "bg-background text-brand border text-h1",
-    secondary: "bg-background border border-border text-text-inverse hover:bg-surface-muted",
+    primary: "bg-background text-brand border text-body hover:bg-background-inverse hover:text-text-inverse",
+    secondary: "bg-background border border-border text-text-primary hover:bg-surface-muted hover:text-text-inverse",
 };
     // before: -inset - y - [6px] area tactil del boton de y
 const sizes ={
