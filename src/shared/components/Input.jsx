@@ -3,6 +3,7 @@
 export default function Input({
     label,
     type = "Text",
+    error,
     ...propos
     // porps son las propiedades de un componenete. Y label para que por defecto el campo sea tipo texto
 }) {
@@ -14,18 +15,17 @@ export default function Input({
 
             {label &&(
                 <label
-                    className="
-                    block
+                    className={
+                    `block
                     text-[8px]
                     mb-1
                     place-self-start
-                ">
+                    ${error ? "text-red-800" : "text-text-primary" }
+                `}
+                >
                     {label}
-
                 </label>
             )}
-
-            
 
             {/* contenedor del input */}
             {/* este classname permite escribir en todos los campo */}
@@ -56,7 +56,7 @@ export default function Input({
                     <input
                     // toma el input de cuando se crea el input
                     type={type}
-                    className="
+                    className={`
                         relative
                         w-full
                         h-12
@@ -66,20 +66,22 @@ export default function Input({
                         px-4
                         text-base
 
+                        hover:border-2
+                        hover:border-focus-border
+
                         focus:outline-none
-                        focus:ring-2
+                        focus:ring-1
                         focus:ring-focus-ring
-                        focus: corder-focus-border
-                    "
-                        {...propos}
+
+                        ${error ? "border-red-800" : "border border-border" }
+                        `}
+                    {...propos}
                     >
                     </input>
 
             </div>
             {/* Feedback message */}
-            <div>
-
-            </div>
+            {error && <p className="text-caption text-red-800 place-self-start">{error}</p>}
         </div>
     )
 };

@@ -32,7 +32,7 @@
      /* ==FOCUS=== */
 
     --color-focus-ring: var(--semantic-focus-ring);
-    --color-focus-bordes: var( --semantic-focus-border);
+    --color-focus-border: var( --semantic-focus-border);
 
     /* == STAGE === */
 
