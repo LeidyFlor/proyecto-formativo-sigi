@@ -6,6 +6,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
+        // Nested Routes
         children: [
             {
                 index: true,

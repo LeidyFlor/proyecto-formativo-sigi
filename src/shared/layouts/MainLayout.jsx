@@ -9,7 +9,8 @@ export default function MainLayout(){
             <div className="absolute inset-0 -z-10 bg-cover bg-center"
             style={{ backgroundImage: `url(${heroBg})`}}
             />
-
+            {/* outlet inyecta los elemntos hijos de las routes */}
+            <Outlet />
             <CreateUserPage />
         </div>
     )
