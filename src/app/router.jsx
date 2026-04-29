@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 //calltoaction invita a la persona no registrada a hacer algo
 import { AuthLayout, DashboardLayout }  from "@/shared/";
 import { CreateUserPage } from "@/features/users";
+import { LoginForm } from "@/features/auth";
 
 const router = createBrowserRouter([
     {   
@@ -19,8 +20,8 @@ const router = createBrowserRouter([
         element: <DashboardLayout />,
         // Nested Routes
         children: [
-            {index: true, element: <h1 >Inicio Dashboard</h1>},
-            {path: "contacto",element: <h1>Contacto</h1>},
+            {index: true, element: <CreateUserPage />},
+            { path: "/dashboard/auth", element: <LoginForm  />},
             {path: "usuarios",element: <h1>Usuarios</h1>},
             {path: "productos",element: <h1>Productos</h1>}
         ],

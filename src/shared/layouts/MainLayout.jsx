@@ -10,7 +10,6 @@ export default function MainLayout(){
             style={{ backgroundImage: `url(${heroBg})`}}
             />
             {/* outlet inyecta los elemntos hijos de las routes */}
-            <Outlet />
             <CreateUserPage />
         </div>
     )

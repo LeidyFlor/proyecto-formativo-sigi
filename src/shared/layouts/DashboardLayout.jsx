@@ -3,7 +3,8 @@ import heroBg from "@/assets/images/bg-1.jpg";
 import { CreateUserPage } from "@/features/users";
 import { CloudBackup } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { IconButton } from "@/shared"
+import { IconButton, Navbar } from "@/shared"
+import { LoginForm } from "@/features/auth";
 
 export default function DashboardLayout() {
     const navigate = useNavigate();
@@ -13,14 +14,22 @@ export default function DashboardLayout() {
             <div className="absolute inset-0 -z-10 bg-cover bg-center"
                 style={{ backgroundImage: `url(${heroBg})` }}
             />
-            {/* outlet inyecta los elemntos hijos de las routes */}
-            <Outlet />
+
             <IconButton>
 
                 <CloudBackup
                     onClick={() => navigate(-1)}
                 ></CloudBackup>
             </IconButton>
+
+            <Navbar />
+                {/* Contenido dinamico de las paginas */}
+            <main>
+ 
+                <Outlet />
+
+            </main>
+
         </div>
     )
 }

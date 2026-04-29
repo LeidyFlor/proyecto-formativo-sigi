@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
-import heroBg from "@/assets/images/bg-4.jpg";
+import heroBg from "@/assets/images/bg-2.jpg";
 import { CreateUserPage } from "@/features/users";
+import { LoginForm } from "@/features/auth";
 
 export default function AuthLayout() {
     return (
@@ -11,7 +12,13 @@ export default function AuthLayout() {
             />
             {/* outlet inyecta los elemntos hijos de las routes */}
             {/* <Outlet /> */}
-            <CreateUserPage />
+
+            <main>
+                < LoginForm />
+
+                <Outlet />
+            </main>
+            
         </div>
     )
 }

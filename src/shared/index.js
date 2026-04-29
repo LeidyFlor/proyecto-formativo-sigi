@@ -9,5 +9,6 @@ export { IconButton } from "./components/IconButton.jsx";
 export { Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from "./components/Dropdown.jsx";
 // export { default as CallToActionLayout } from "./layouts/CallToActionLayout.jsx";
 export { default as AuthLayout } from "./layouts/AuthLayout.jsx";
+export { default as Navbar } from "./layouts/Navbar.jsx";
 export { default as DashboardLayout } from "./layouts/DashboardLayout.jsx";
 //Exporta layout y components
