@@ -1,9 +1,12 @@
-import { Input, Button, Select, Checkbox } from "@/shared"
+import { Input, Button, Select, Checkbox, IconButton, Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from "@/shared"
 import { getDocumentTypes } from "@/features/users/services/selectService";
 import { useEffect, useState } from "react";
 import { userShema } from "../schemas/userSchema";
+import { Link, useNavigate } from "react-router-dom";
+import { SquareArrowRightEnter, Menu } from "lucide-react";
 
 export default function UserRegisterForm(){
+    const navigate = useNavigate();
     //useState para saber cuando cambia de estado algo, su valor por ejemplo
     const [ documentTypes, setDocumentTypes] =useState([]);
     const [ formData, setFormData] = useState({
@@ -83,14 +86,14 @@ export default function UserRegisterForm(){
 
     return(
         <div>
-            <h1 className="text-text-primary text-2xl mb-6">
+            <h1 className="text-text-primary text-2xl mb-6 text-center pt-12">
                 Registro de usuario
             </h1>
             <form className="grid grid-cols-1 items-center gap-6 "
             onSubmit={handleSubmit}
             >
                 {/* Inputs */}
-                <div className="grid grid-cols-2 gap-6 my-0 mx-auto">
+                <div className="grid grid-cols-2 gap-6 my-0 mx-auto border p-6 rounded-[6px]">
                     <Input
                         label="Nombre"
                         name="userName"
@@ -171,6 +174,8 @@ export default function UserRegisterForm(){
                         <Button
                             variant="secondary"
                             size="sm"
+                            // el navigate -1 lleva a un layout anterior
+                            onClick={() => navigate (-1)}
                         >
                             Cancelar
                         </Button>
@@ -182,8 +187,44 @@ export default function UserRegisterForm(){
                             Guardar
                         </Button>
 
+                    {/* Icon button */}
+                    {/* el link debe de ser el mismo del de rutas */}
+                        <Link to="/dashboard">
+                        <IconButton 
+                            variant ="ghost"
+                        >
+                            <SquareArrowRightEnter />
+                        </IconButton>
+                    </Link>
+                    {/* <a href="/DashboardLayout">
+                            <IconButton >
+                                <SquareArrowRightEnter />
+                            </IconButton>
+                    </a> */}
+                    {/* ===============  Dropdown   ================ */}
+                    <div className="p-10">
+                        <Dropdown>
+                            <DropdownTrigger>
+                                <IconButton arialLabel="Menu de usuario">
+                                    <Menu/>
+                                </IconButton>
+                            </DropdownTrigger>
 
+                            <DropdownContent className="right-0 w-48">
+                                <DropdownItem>
+                                    <Link to="/auth" className="block w-full"> 
+                                    Autenticacion
+                                    </Link>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <Link to="/dashboard" className="block w-full"> 
+                                    Panel de control
+                                    </Link>
+                                </DropdownItem>
 
+                            </DropdownContent>
+                        </Dropdown>
+                    </div>
                     </div>
                 </div>
                 
