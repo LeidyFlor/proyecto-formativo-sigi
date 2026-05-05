@@ -11,8 +11,6 @@ export default function AuthLayout() {
                 style={{ backgroundImage: `url(${heroBg})` }}
             />
             {/* outlet inyecta los elemntos hijos de las routes */}
-            {/* <Outlet /> */}
-
             <main>
                 < LoginForm />
 
