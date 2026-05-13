@@ -10,7 +10,7 @@ export default function Input({
     // cuerpo de la funcion
     return (
         //Contenedor del input que se exporta con label, cuerpo y feedback message
-        <div className="w-[320px]">
+        <div className="w-full">
             {/* LABEL. JWT evalua si tal es 1, si si lo hace  */}
 
             {label &&(

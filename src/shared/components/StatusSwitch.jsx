@@ -10,6 +10,7 @@ export default function StatusSwitch({
     onChange,           //Callback que se ejecuta cuando cambia el estado
     disabled = false,   //Permite deshabilitar la interaccion
     size = "md",        //Tamaño de switch (sm, md, lg)
+    className,
 }) {
 
     //Estado interno del componente
@@ -63,7 +64,7 @@ export default function StatusSwitch({
             className={`
 
                     //Posicionamiento base del switch
-                    relative inline-flex items-center
+                    relative items-center
 
                     //Forma redondeada del contenedor
                     rounded-full transition-colors
@@ -76,6 +77,8 @@ export default function StatusSwitch({
 
                     // Estilo cuando esta deshabilitado
                     ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+
+                    ${className}
                 `}
         >
 
