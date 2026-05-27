@@ -1,0 +1,2 @@
+#Varialbles de entorno, seran ignorados y no se subira al repositorio
+.env
