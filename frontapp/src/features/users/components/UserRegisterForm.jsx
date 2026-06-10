@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { userShema } from "../schemas/userSchema";
 import { Link, useNavigate } from "react-router-dom";
 import { SquareArrowRightEnter, Menu } from "lucide-react";
+import { createUser } from "../services/userService"; //lo que trae de bakend
 
 export default function UserRegisterForm(){
     const navigate = useNavigate();
     //useState para saber cuando cambia de estado algo, su valor por ejemplo
+    const [isSubmitting, setIsSubmitting] =useState(false);
     const [ documentTypes, setDocumentTypes] =useState([]);
     const [ formData, setFormData] = useState({
         userName:"",
@@ -48,43 +50,87 @@ export default function UserRegisterForm(){
         [name]: type === "checkbox" ? checked :  value,
     }));
    };
-    // ==================================================
-    //              Handle Submit
-    // ==================================================
-    /*
-        Función que se ejecuta cuando se envía el formulario
-    */
+   
+    //============== HANDLE SUBMIT ==============
+    const handleSubmit = async (e) => {
 
-    const handleSubmit = (e) => {
 
+        // Evita que el formulario recargue la página
         e.preventDefault();
 
-        //Se valida el objeto formData usando el esquema definido con Zod
-        // safeParse devuelve un objeto indicando si la validacion fue exitosa o no
+
+        // Validamos los datos del formulario contra el esquema Zod
+        // safeParse NO lanza excepción, retorna un objeto controlado
         const result = userShema.safeParse(formData);
 
-        //Si la validacion falla
-        if (!result.success){
-            const fieldErrors ={};
 
-            //Zod devuelve los errores en un arreglo llamado issues
-            //se recorren para asociar cada error a su campo correspondiente
-            result.error.issues.forEach((issue) =>{
-                const field = issue.path[0]
+        // Si la validación falla
+        if (!result.success) {
 
-                //Se guarda el mensaje de error en el objeto fieldErrors
-                fieldErrors[field] = issue.message;
+
+            // Objeto donde almacenaremos los errores por campo
+            const fieldErrors = {};
+
+
+            // Recorremos cada error generado por Zod
+            result.error.issues.forEach((issue) => {
+                // issue.path[0] corresponde al nombre del campo
+                // issue.message contiene el mensaje de error definido en el schema
+                fieldErrors[issue.path[0]] = issue.message;
             });
-            //Se actualiza el estado de errores para mostrarlos en el formulario
+
+
+            // Actualizamos el estado de errores para mostrarlos en la UI
             setErrors(fieldErrors);
-            //Se detiene la ejecucion porque el formulario tiene errores
+
+
+            // Cortamos la ejecución: NO se envía nada al backend
             return;
         }
-        //Si la validacion es exitosa se limpian los errores anteriores
+
+
+        // Si la validación pasa, limpiamos errores previos
         setErrors({});
-        //result.data contiene los datos ya validados por Zod
-        console.log("Usuario valido:", result.data);
-    }
+
+
+        // Activamos estado de envío (útil para deshabilitar el botón)
+        setIsSubmitting(true);
+
+
+        try {
+            // Llamamos al servicio frontend que consume la API
+            // result.data contiene los datos ya validados por Zod
+            const response = await createUser(result.data);
+
+
+            // Log informativo para desarrollo
+            console.log("Usuario creado:", response);
+
+
+            // Feedback básico al usuario
+            alert("Usuario creado correctamente");
+
+
+            // Navegamos a la vista anterior
+            // navigate(-1) equivale a "volver atrás"
+            navigate(-1);
+
+
+        } catch (error) {
+            // Capturamos errores de red o errores lanzados por el service
+            console.error("Error:", error.message);
+
+
+            // Mostramos el mensaje de error al usuario
+            alert(error.message);
+
+
+        } finally {
+            // Pase lo que pase, desactivamos el estado de envío
+            setIsSubmitting(false);
+        }
+    };
+
 
     return(
         <div>
@@ -133,7 +179,7 @@ export default function UserRegisterForm(){
                     />
                     <Input
                         label="Número de documento"
-                        name="userDocumenNumber"
+                        name="userDocumentNumber"
                         placeholder="Ingrese su numero de documento"
                         value={formData.userDocumentNumber}
                         onChange={handleChange}
@@ -200,8 +246,9 @@ export default function UserRegisterForm(){
                         <Button
                             variant="primary"
                             size="md"
+                            disable={isSubmitting}
                         >
-                            Guardar
+                            {isSubmitting ? "Guardando..." : "Guardar"}
                         </Button>
 
                     {/* Icon button */}

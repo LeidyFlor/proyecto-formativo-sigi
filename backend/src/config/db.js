@@ -1,4 +1,4 @@
-backend / src / config / db.js;
+//backend / src / config / db.js;
 // Importamos el paquete 'pg' usando el sistema de módulos ES.// Importamos el paqueteSQL para Node.js
 import pkg from "pg";
 
