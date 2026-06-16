@@ -1,8 +1,9 @@
 import { Input, Button, Select, Checkbox, IconButton, Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from "@/shared"
 import { useState } from "react";
-import { loginShema } from "../schemas/loginSchema";
-import { Link, useNavigate } from "react-router-dom";
+import { loginSchema } from "../schemas/loginSchema.js";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { SquareArrowRightEnter, Menu } from "lucide-react";
+import { login } from "../services/authService.js";
 
 export default function LoginForm() {
     const navigate = useNavigate();
@@ -10,8 +11,6 @@ export default function LoginForm() {
     const [formData, setFormData] = useState({
         userEmail: "",
         userPassword: "",
-
-
     });
     const [errors, setErrors] = useState({});
 
@@ -40,13 +39,13 @@ export default function LoginForm() {
         Función que se ejecuta cuando se envía el formulario
     */
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
         //Se valida el objeto formData usando el esquema definido con Zod
         // safeParse devuelve un objeto indicando si la validacion fue exitosa o no
-        const result = loginShema.safeParse(formData);
+        const result = loginSchema.safeParse(formData);
 
         //Si la validacion falla
         if (!result.success) {
@@ -55,10 +54,8 @@ export default function LoginForm() {
             //Zod devuelve los errores en un arreglo llamado issues
             //se recorren para asociar cada error a su campo correspondiente
             result.error.issues.forEach((issue) => {
-                const field = issue.path[0]
-
                 //Se guarda el mensaje de error en el objeto fieldErrors
-                fieldErrors[field] = issue.message;
+                fieldErrors[issue.path[0]] = issue.message;
             });
             //Se actualiza el estado de errores para mostrarlos en el formulario
             setErrors(fieldErrors);
@@ -68,8 +65,17 @@ export default function LoginForm() {
         //Si la validacion es exitosa se limpian los errores anteriores
         setErrors({});
         //result.data contiene los datos ya validados por Zod
-        console.log("Usuario valido:", result.data);
-    }
+        try{
+            const data = await login(result.data);
+            console.log("LOGIN RESPONSE:", data);
+            sessionStorage.setItem("token", data.token); //clave
+
+            //despues de loguear a donde me lleva
+            navigate("/dashboard/userList");
+        } catch (error){
+            alert(error.message);
+        }
+    };
 
     return (
         // Para poner en la mitad la card del login
@@ -113,8 +119,7 @@ export default function LoginForm() {
                         <Button
                             variant="primary"
                             size="md"
-                            // el navigate -1 lleva a un layout anterior
-                            onClick={() => navigate(-1)}
+                            type="submit"
                         >
                             Iniciar sesión
                         </Button>

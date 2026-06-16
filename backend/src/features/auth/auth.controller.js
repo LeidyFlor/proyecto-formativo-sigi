@@ -13,7 +13,7 @@ export const authController = {
             });
         } catch (err) {
             res.status(401).json({
-                error: err.massage,
+                error: err.message,
             });
         }
     }

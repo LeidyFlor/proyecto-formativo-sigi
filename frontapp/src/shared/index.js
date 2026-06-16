@@ -17,5 +17,5 @@ export { Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from "./comp
 export { default as AuthLayout } from "./layouts/AuthLayout.jsx";
 export { default as Navbar } from "./layouts/Navbar.jsx";
 export { default as DashboardLayout } from "./layouts/DashboardLayout.jsx";
-
+export { default as ProtectedRoute } from "./components/auth/ProtectedRoute.jsx";
 //Exporta layout y components
