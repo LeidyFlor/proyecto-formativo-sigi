@@ -112,6 +112,11 @@ export default function Navbar() {
                                         Gestion de usuarios
                                     </Link>
                                 </DropdownItem>
+                                <DropdownItem>
+                                    <Link to="access" className="block w-full">
+                                        Admin
+                                    </Link>
+                                </DropdownItem>
 
                             </DropdownContent>
                         </Dropdown>
