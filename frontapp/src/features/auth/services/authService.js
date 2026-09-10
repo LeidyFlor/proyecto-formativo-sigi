@@ -1,11 +1,15 @@
 // frontend/src/features/auth/services/authService.js
 // Consumir API login
 // 🤣🤣
-const API_URL = "/api/auth";
+//const API_URL = "/api/auth";
+
+import { API_URL } from "@/features/config";
+
+const AUTH_API_URL = `${API_URL}/auth`;
 
 export async function login(userData) {
 
-  const response = await fetch(`${API_URL}/login`, {
+  const response = await fetch(`${AUTH_API_URL}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
