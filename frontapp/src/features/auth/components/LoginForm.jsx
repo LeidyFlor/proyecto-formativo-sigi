@@ -81,7 +81,7 @@ export default function LoginForm() {
         // Para poner en la mitad la card del login
         <div className="flex flex-col place-items-center justify-center h-screen">
             <h1 className="text-text-primary text-2xl mb-6 text-center pt-12">
-                Inicio de sesion
+                Inicio de sesion LEIDY
             </h1>
             <form className="grid grid-cols-1 items-center gap-6 "
                 onSubmit={handleSubmit}
